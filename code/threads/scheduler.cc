@@ -39,7 +39,7 @@ int cmpPriority(Thread* thd1, Thread* thd2)
 }
 int cmpSRTF(Thread* thd1,Thread* thd2)       //一開始宣告global scope
 {
-      if(thd1->getburst() < thd2->getburst())
+      if(thd1->getBurstTime() < thd2->getBurstTime())
          return -1;
       else
          return 0;
@@ -180,10 +180,13 @@ Scheduler::Run (Thread *nextThread, bool finishing)
 	 cout << "current thread priority: " << oldThread->getPriority() <<" next thread priority: " << nextThread->getPriority()<<endl;
 	  break;
 	case SJF:
-	  //cout << "current Thread BurstTime: " <<oldThread->getBurstTime()<<"  Next Thread BurstTime-> "<<nextThread->getBurstTime()<<endl;  
+	  cout << "current Thread BurstTime: " <<oldThread->getBurstTime()<<"  Next Thread BurstTime-> "<<nextThread->getBurstTime()<<endl;  
 	    break;
 	case SRTF:
-	   oldThread->setTime(20);   //oldthreadtime - timetick
+          oldThread->MinesBurst(10);
+          cout << "Run Thread ID: " << oldThread->getID() << " burst: " << oldThread->getBurstTime() <<  "=> Id: " << nextThread->getID() << " burst: " << nextThread->getBurstTime() << endl;
+
+	   //oldThread->setTime(20);   //oldthreadtime - timetick
     	   //cout << "current Thread BurstTime ->" << oldThread->getburst() << "  Next Thread BurstTime -> "<<nextThread->getburst()<<endl;
 	   break; 
 	default:

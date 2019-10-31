@@ -82,7 +82,8 @@ class Thread {
     // THEY MUST be in this position for SWITCH to work.
     int *stackTop;			 // the current stack pointer
     void *machineState[MachineStateSize];  // all registers except for stackTop
-    int bursttime;
+    int bursttime; //m_burst
+    int id;
   public:
 	
     int priority; //used to save prio
@@ -91,13 +92,17 @@ class Thread {
 
     int burst;
     void setTime(int a){burst=burst-a;}
+
+    void MinesBurst(int val){bursttime-=val;}
+    int getID(){return id;}
+
     int getburst()
     {
               return burst;
 
     }    //定義一個執行時間的函式
     
-    int  getBurstTime(){return bursttime;};
+    int  getBurstTime(){return bursttime;}; // get m_burst
     Thread(char* debugName);		// initialize a Thread 
     Thread(char* debugName, int t);
     ~Thread(); 				// deallocate a Thread
@@ -106,7 +111,7 @@ class Thread {
 					// is called
 
     // basic thread operations
-
+    int st;//scehduler type
     void Fork(VoidFunctionPtr func, void *arg); 
     				// Make thread run (*func)(arg)
     void Yield();  		// Relinquish the CPU if any 

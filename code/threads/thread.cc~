@@ -41,12 +41,24 @@ Thread::Thread(char* threadName)
     stackTop = NULL;
 
     stack = NULL;
+
+
+////////////////////////////// SRTF ////////////////////////
+    static int sid = 0;
+    id = sid++;
+    bursttime = rand()%1000+1;   //m_burst
+    cout << "Thread burst time: " << bursttime << "Created!" << endl;
+    cout << "Thread Id: " << id << "burst time: " << bursttime << "Created!\n";
+///////////////////////////////////////////////////////////
     
+
     status = JUST_CREATED;
+
+
     burst = rand() % 1000+1;    //set隨機從500個中取樣
     priority = (rand()%50);
     
-    cout << "new thread: " << thread->getName() << " burst time: " << burst <<endl;
+    cout << "new thread: " << this->getName() << " burst time: " << burst <<endl;
     Thread_Time = 0;          // Nachos may run other unknown threads , we set it to zero so that there is no problem to run SJF scheduling.
 
     for (int i = 0; i < MachineStateSize; i++) {

@@ -41,8 +41,20 @@ Thread::Thread(char* threadName)
     stackTop = NULL;
 
     stack = NULL;
+
+
+////////////////////////////// SRTF ////////////////////////
+    static int sid = 0;
+    id = sid++;
+    bursttime = rand()%1000+1;   //m_burst
+    cout << "Thread burst time: " << bursttime << "Created!" << endl;
+    cout << "Thread Id: " << id << " burst time: " << bursttime << "Created!\n";
+///////////////////////////////////////////////////////////
     
+
     status = JUST_CREATED;
+
+
     burst = rand() % 1000+1;    //set隨機從500個中取樣
     priority = (rand()%50);
     

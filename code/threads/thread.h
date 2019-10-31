@@ -83,6 +83,7 @@ class Thread {
     int *stackTop;			 // the current stack pointer
     void *machineState[MachineStateSize];  // all registers except for stackTop
     int bursttime;
+    int id;
   public:
 	
     int priority; //used to save prio
@@ -91,13 +92,20 @@ class Thread {
 
     int burst;
     void setTime(int a){burst=burst-a;}
+
+
+//////////// SRTF ////////////////////////////////////
+    void MinesBurst(int val){bursttime-=val;}
+    int getID(){return id;}
+/////////////////////////////////////////////////////
+
     int getburst()
     {
               return burst;
 
     }    //定義一個執行時間的函式
     
-    int  getBurstTime(){return bursttime;};
+    int  getBurstTime(){return bursttime;}; // get m_burst
     Thread(char* debugName);		// initialize a Thread 
     Thread(char* debugName, int t);
     ~Thread(); 				// deallocate a Thread
